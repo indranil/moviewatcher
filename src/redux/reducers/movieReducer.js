@@ -16,8 +16,6 @@ const initialState = {
 const movieReducer = (state = initialState, action) => {
   let movies = Array.from(state.movies);
   
-  console.log(action);
-  
   switch (action.type) {
     case WATCH_MOVIE:
       // basic check to see if movie exists
