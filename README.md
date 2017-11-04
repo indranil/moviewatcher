@@ -7,4 +7,4 @@ This is just a test app.
 
 https://movies-watched.surge.sh/
 
-Just doing another branch with redux-thunk.
+There are 2 branches, `master` and `redux-thunk`. The first one keeps the actions as they are and does not use redux-thunk. Second one does!
