@@ -1,13 +1,22 @@
-import { WATCH_MOVIE, UNWATCH_MOVIE } from '../actions/movieActionCreators';
+import {
+  WATCH_MOVIE,
+  UNWATCH_MOVIE,
+  SEARCH_RESULTS,
+  CLEAR_SEARCH
+} from '../actions/movieActions';
 
 // Initial list of movies
 // TODO: Load / save movies to a db, maybe localStorage?
 const initialState = {
-  movies: []
+  movies: [],
+  searchResults: [],
+  noResults: false
 }
 
 const movieReducer = (state = initialState, action) => {
   let movies = Array.from(state.movies);
+  
+  console.log(action);
   
   switch (action.type) {
     case WATCH_MOVIE:
@@ -21,6 +30,7 @@ const movieReducer = (state = initialState, action) => {
       
       if (!movieExists) {
         return {
+          ...state,
           movies: [
             ...movies,
             action.movie
@@ -28,7 +38,7 @@ const movieReducer = (state = initialState, action) => {
         };
       }
       return {
-        movies
+        ...state
       };
       
     case UNWATCH_MOVIE:
@@ -37,7 +47,22 @@ const movieReducer = (state = initialState, action) => {
       });
       
       return {
-        movies: newMovies
+        ...state,
+        movies: newMovies,
+      };
+      
+    case SEARCH_RESULTS:
+      return {
+        ...state,
+        noResults: !action.results.length,
+        searchResults: action.results
+      };
+      
+    case CLEAR_SEARCH:
+      return {
+        ...state,
+        noResults: false,
+        searchResults: []
       };
       
     default:

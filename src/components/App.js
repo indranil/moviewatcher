@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { watchMovie, unwatchMovie } from '../redux/actions/movieActionCreators';
+import { watchMovie, unwatchMovie, movieSearchResults, clearSearch } from '../redux/actions/movieActions';
 
 import SearchForm from './SearchForm';
 import SearchResults from './SearchResults';
@@ -12,8 +12,6 @@ import tmdb from '../images/tmdb.png';
 export class App extends Component {
   state = {
     search: "",
-    searchResults: [],
-    noResults: false,
   };
   
   changeSearch = e => {
@@ -23,34 +21,16 @@ export class App extends Component {
   }
   
   clearSearch = () => {
+    this.props.onClearSearch();
     this.setState({
-      search: "",
-      searchResults: [],
-      noResults: false,
+      search: ""
     })
   }
   
   searchMovies = (e) => {
     e.preventDefault();
     if (this.state.search !== '') {
-      let api_key = process.env.REACT_APP_TMDB_API_KEY;
-      let url = `https://api.themoviedb.org/3/search/movie?api_key=${api_key}&language=en-US&query=${this.state.search}&page=1&include_adult=true`;
-      
-      fetch(url)
-        .then(res => res.json())
-        .then(res => {
-          if (res.results.length > 0) {
-            this.setState({
-              searchResults: res.results,
-              noResults: false,
-            });
-          } else {
-            this.setState({
-              searchResults: [],
-              noResults: true,
-            });
-          }
-        });
+      this.props.onMovieSearch(this.state.search);
     } else {
       this.clearSearch();
     }
@@ -71,8 +51,8 @@ export class App extends Component {
         
         <SearchResults
           clearSearch={this.clearSearch}
-          searchResults={this.state.searchResults}
-          noResults={this.state.noResults}
+          searchResults={this.props.searchResults}
+          noResults={this.props.noResults}
           onMovieAdd={this.props.onMovieAdd} />
         
         <div className="my-movies">
@@ -95,16 +75,24 @@ export class App extends Component {
 
 const mapStateToProps = state => (
   {
-    movies: state.movieReducer.movies
+    movies: state.movieReducer.movies,
+    searchResults: state.movieReducer.searchResults,
+    noResults: state.movieReducer.noResults
   }
 )
 const mapDispatchToProps = dispatch => {
   return {
-    onMovieAdd: movieId => {
-      dispatch(watchMovie(movieId))
+    onMovieAdd: movie => {
+      dispatch(watchMovie(movie))
     },
     onMovieRemove: movieId => {
       dispatch(unwatchMovie(movieId))
+    },
+    onMovieSearch: query => {
+      dispatch(movieSearchResults(query))
+    },
+    onClearSearch: () => {
+      dispatch(clearSearch())
     }
   }
 }
