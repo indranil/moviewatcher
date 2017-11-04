@@ -1,0 +1,172 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+a {
+  color: #fff;
+}
+
+body {
+  text-align: center;
+  background: #7f8c8d;
+  font-family: 'Quicksand', sans-serif;
+}
+
+.App {
+  width: 1080px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  background: #2c3e50;
+  min-height: 1vh;
+  margin: 0 auto;
+  text-align: left;
+  padding: 0 40px;
+  color: white;
+}
+
+header {
+  padding: 40px 0 20px;
+  vertical-align: baseline;
+}
+
+header h1 {
+  font-size: 60px;
+  float: left;
+  vertical-align: baseline;
+}
+
+header p {
+  padding-top: 45px;
+  float: right;
+  vertical-align: baseline;
+}
+
+.search-movie {
+  padding-bottom: 10px;
+}
+.search-movie input {
+  width: 70%;
+  padding: 10px;
+  font-family: inherit;
+  outline: none;
+  font-size: 20px;
+  float: left;
+  border: 0;
+}
+.search-movie button {
+  float: right;
+  width: 29%;
+  border: none;
+  background: #ecf0f1;
+  color: #34495e;
+  padding: 10px;
+  border-radius: 0;
+  font-family: inherit;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.search-results {
+  padding: 20px;
+  background: #bdc3c7;
+}
+
+.search-results h3 {
+  font-size: 24px;
+  padding-bottom: 10px;
+}
+
+.search-results button.clear-search {
+  float: right;
+  padding: 10px;
+  font-size: 15px;
+  font-family: inherit;
+  cursor: pointer;
+  background: #f1c40f;
+  border: none;
+  border-radius: 0;
+  color: white;
+}
+
+.movies {
+  padding: 0;
+  list-style: none;
+}
+.movies li {
+  float: left;
+  width: 195px;
+  margin-right: 40px;
+  margin-bottom: 20px;
+}
+.movies li a {
+  text-decoration: none;
+}
+.movies li a .img-container {
+  border: 5px solid white;
+  width: 195px;
+  height: 288px;
+}
+.movies li h3 {
+  font-size: 18px;
+  padding-bottom: 0;
+}
+.movies li p {
+  font-size: 14px;
+  float: left;
+}
+.movies li button {
+  opacity: 0;
+  float: right;
+  padding: 4px;
+  font-family: inherit;
+  border: none;
+  color: white;
+  border-radius: 0;
+  cursor: pointer;
+  transition: 0.3s all ease-in;
+}
+
+.movies li:hover button {
+  opacity: 1;
+}
+
+.movies li button.add {
+  background: #27ae60;
+}
+.movies li button.remove {
+  background: #c0392b;
+}
+
+.my-movies {
+  padding: 20px 0;
+}
+
+.my-movies h2 {
+  font-size: 28px;
+  padding-bottom: 10px;
+}
+
+footer {
+  text-align: center;
+  padding: 20px 0;
+  font-size: 12px;
+}
+
+footer .by {
+  float: left;
+}
+
+footer .attr {
+  float: right;
+}
+footer .attr img {
+  height: 40px;
+}
+
+
+.cf:after {
+  content: "";
+  display: table;
+  clear: both;
+}
